@@ -31,3 +31,20 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: npm run build
       - run: npm run typecheck
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Local test configuration
+        run: |
+          cp .env.example .env
+          echo POSTGRES_PASSWORD=ci-test-only >> .env
+          echo MEDJON_API_KEY=ci-test-only >> .env
+      - run: docker compose up -d --build db api web
+      - name: Smoke test
+        run: |
+          curl --retry 30 --retry-all-errors --retry-delay 3 -fsS http://localhost:8000/health
+          curl --retry 30 --retry-all-errors --retry-delay 3 -fsS http://localhost:3000/ > /dev/null
+          test "$(curl -s -o /dev/null -w '%{http_code}' -H 'Content-Type: application/json' -d '{"query":"asthma","bibliographic_only":true}' http://localhost:8000/research/pubmed)" = 401
+      - if: always()
+        run: docker compose down -v
