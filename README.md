@@ -39,3 +39,6 @@ Licenciamento definitivo a confirmar antes de distribuição como software livre
 
 ## Fase 3 (experimental)
 Veja [recuperação semântica](docs/PHASE3.md). Os endpoints autenticados de pesquisa substituem a descrição anterior de API somente health nesta branch. Ainda não há geração clínica.
+
+## Fase 4 — Interface
+Após configurar .env e iniciar Docker Compose, abra http://localhost:3000. Consulte [PHASE4](docs/PHASE4.md). Uso local experimental; não exponha à rede.
