@@ -1,0 +1,2 @@
+# Arquitetura
+FastAPI com adaptadores independentes para PubMed e Firecrawl. PostgreSQL/pgvector provisionado, ainda sem integração. Interface Next.js, cache, orçamento de créditos, indexação RAG e provedor de IA são etapas futuras. Codex é ferramenta de desenvolvimento, não backend de inferência. Plus não inclui créditos da API OpenAI. Firecrawl MCP deve ser configurado separadamente no ambiente local; consulte https://github.com/firecrawl/firecrawl-mcp-server e mantenha a chave fora do Git.
