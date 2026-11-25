@@ -8,12 +8,17 @@ import httpx
 BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 async def search(query: str, limit: int = 5) -> list[dict]:
+    articles, _ = await search_with_cache(query, limit)
+    return articles
+
+
+async def search_with_cache(query: str, limit: int = 5) -> tuple[list[dict], bool]:
     params = {"db": "pubmed", "term": query, "retmode": "json",
               "retmax": max(1, min(limit, 20)), "tool": "medjon"}
     key = store.cache_key("pubmed", query, params["retmax"])
     cached = await store.lookup(key)
     if cached is not None:
-        return cached
+        return cached, True
     for env, field in (("NCBI_API_KEY", "api_key"), ("NCBI_EMAIL", "email")):
         if os.getenv(env):
             params[field] = os.environ[env]
@@ -25,7 +30,7 @@ async def search(query: str, limit: int = 5) -> list[dict]:
         ids = response.json()["esearchresult"]["idlist"]
         if not ids:
             await store.save(key, [], "pubmed", [])
-            return []
+            return [], False
         await asyncio.sleep(0.35)
         params.pop("term")
         params.pop("retmax")
@@ -43,4 +48,4 @@ async def search(query: str, limit: int = 5) -> list[dict]:
                  "url": f"https://pubmed.ncbi.nlm.nih.gov/{uid}/"}
                 for uid in ids]
         await store.save(key, articles, "pubmed", articles)
-        return articles
+        return articles, False
