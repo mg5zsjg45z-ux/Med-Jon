@@ -1,4 +1,14 @@
 services:
+  web:
+    build: ./frontend
+    environment:
+      MEDJON_API_KEY: ${MEDJON_API_KEY:?configure MEDJON_API_KEY}
+      MEDJON_BACKEND_URL: http://api:8000
+      MEDJON_WEB_ORIGIN: http://localhost:3000
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - api
   api:
     build: ./backend
     env_file: .env
