@@ -10,7 +10,7 @@ async def lifespan(app):
     await asyncio.to_thread(rag.initialize)
     yield
 
-app = FastAPI(title="Med-Jon", version="0.3.0", lifespan=lifespan)
+app = FastAPI(title="Med-Jon", version="0.5.0", lifespan=lifespan)
 
 @app.get("/health")
 def health():
