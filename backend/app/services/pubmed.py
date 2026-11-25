@@ -24,6 +24,8 @@ async def search(query: str, limit: int = 5) -> list[dict]:
         records = response.json()["result"]
         return [{"pmid": uid, "title": records[uid].get("title"),
                  "year_or_date": records[uid].get("pubdate"),
+                 "authors": [a.get("name") for a in records[uid].get("authors", [])],
+                 "journal": records[uid].get("fulljournalname"),
                  "doi": next((a["value"] for a in records[uid].get("articleids", [])
                               if a.get("idtype") == "doi"), None),
                  "url": f"https://pubmed.ncbi.nlm.nih.gov/{uid}/"}
