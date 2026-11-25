@@ -1,6 +1,6 @@
 import asyncio
 import json
-from app.services import storage, embeddings, research
+from app.services import storage, embeddings, research, abstracts
 
 def initialize():
     with storage.connect() as conn:
@@ -32,7 +32,9 @@ def nearest(vector, limit):
 async def index(query, limit):
     records = [r for r in await research.literature(query, limit) if r.get("title")]
     if records:
-        vectors = await embeddings.embed([r["title"] for r in records])
+        summaries = await abstracts.fetch([r["pmid"] for r in records])
+        records = [{**r, "abstract": summaries.get(r["pmid"])} for r in records]
+        vectors = await embeddings.embed([(r["title"] + "\n" + (r["abstract"] or ""))[:6000] for r in records])
         await asyncio.to_thread(save, records, vectors)
     return records
 
@@ -44,5 +46,5 @@ async def context(query, limit):
     hits = await retrieve(query, limit)
     return {"mode": "retrieval_only", "clinical_validation": False,
             "sources": hits, "context": [{"source_id": h["reference"]["pmid"],
-            "text": h["reference"]["title"]} for h in hits],
-            "limitations": "Somente títulos e metadados; não permite inferir recomendações clínicas."}
+            "text": h["reference"].get("abstract") or h["reference"]["title"]} for h in hits],
+            "limitations": "Resumos quando disponíveis; não permite inferir recomendações clínicas."}
