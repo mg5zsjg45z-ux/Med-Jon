@@ -42,3 +42,6 @@ Veja [recuperação semântica](docs/PHASE3.md). Os endpoints autenticados de pe
 
 ## Fase 4 — Interface
 Após configurar .env e iniciar Docker Compose, abra http://localhost:3000. Consulte [PHASE4](docs/PHASE4.md). Uso local experimental; não exponha à rede.
+
+## Fase 5
+Consulte [critérios de liberação](docs/PHASE5.md). Geração experimental desativada por padrão; endpoint POST /research/answer, com o mesmo corpo e autenticação dos demais. Requer indexação com resumos e modelo Ollama local escolhido pelo operador. Não validado clinicamente.
