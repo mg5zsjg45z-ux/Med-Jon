@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
-const modes = new Set(["pubmed","index","semantic","context"]);
+const modes = new Set(["pubmed","index","semantic","answer"]);
 export async function POST(req: NextRequest) {
  const origin = req.headers.get("origin");
  const expected = process.env.MEDJON_WEB_ORIGIN || "http://localhost:3000";
