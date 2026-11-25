@@ -1,0 +1,2 @@
+# Fase 2
+Cache PostgreSQL com expiração e reserva atômica de orçamento por mês UTC. A reserva de um crédito por scrape é uma estimativa local, não reconcilia cobranças reais, nem corresponde necessariamente ao ciclo do provedor. Não habilitar extrações externas antes de validar custos e redirecionamentos. Extensão vector inicializada; embeddings e busca vetorial ainda pendentes. Consultas PubMed devem ser exclusivamente bibliográficas, sem dados de pacientes. Testes com mocks não substituem testes de integração. Interface e autenticação continuam pendentes.
