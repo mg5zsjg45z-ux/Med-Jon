@@ -45,3 +45,6 @@ Após configurar .env e iniciar Docker Compose, abra http://localhost:3000. Cons
 
 ## Fase 5
 Consulte [critérios de liberação](docs/PHASE5.md). Geração experimental desativada por padrão; endpoint POST /research/answer, com o mesmo corpo e autenticação dos demais. Requer indexação com resumos e modelo Ollama local escolhido pelo operador. Não validado clinicamente.
+
+## v0.1.0-alpha (candidata)
+Síntese RAG experimental disponível na interface após indexação e ativação local do modelo. Veja [critérios de lançamento](docs/RELEASE_ALPHA.md). Não usar em assistência clínica. Licença MIT para o código próprio; modelos e conteúdo bibliográfico têm termos próprios.
