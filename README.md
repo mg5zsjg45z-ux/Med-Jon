@@ -36,3 +36,6 @@ Leia AGENTS.md. Configure Firecrawl MCP separadamente conforme a documentação 
 - [Segurança](docs/SECURITY.md)
 
 Licenciamento definitivo a confirmar antes de distribuição como software livre.
+
+## Fase 3 (experimental)
+Veja [recuperação semântica](docs/PHASE3.md). Os endpoints autenticados de pesquisa substituem a descrição anterior de API somente health nesta branch. Ainda não há geração clínica.
