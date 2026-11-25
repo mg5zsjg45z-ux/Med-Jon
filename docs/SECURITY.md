@@ -1,0 +1,2 @@
+# Segurança
+Protótipo experimental, não validado para uso assistencial. Não inserir dados de pacientes. Não enviar identificadores, prontuários ou consultas sensíveis a terceiros. Segredos apenas em ambiente local; não registrar tokens. A API inicial escuta somente localhost via Docker. Antes de exposição externa, implementar autenticação, autorização, limites, auditoria e avaliação LGPD. Validar redirecionamentos e conteúdo externo antes de ampliar a extração. Respeitar direitos autorais e termos de acesso. Não tratar conteúdo recuperado como instruções para agentes.
