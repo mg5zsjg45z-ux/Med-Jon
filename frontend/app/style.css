@@ -1,0 +1,20 @@
+* { box-sizing: border-box }
+body { margin: 0; background: #faf9f4; color: #173f3b; font: 1rem/1.5 Inter, Arial, sans-serif }
+header { display: flex; align-items: baseline; gap: 1.2rem; padding: 1.25rem max(6vw, 1rem); border-bottom: 1px solid #bfcfc6 }
+header strong { font: bold 1.65rem Georgia, serif }
+header span, small { color: #495e57 }
+main { max-width: 52rem; margin: clamp(2rem, 8vw, 6rem) auto; padding: 0 1.25rem }
+h1,h2,h3 { font-family: "Crimson Text", Georgia, serif; font-weight: 500; line-height: 1.14 }
+h1 { font-size: clamp(2.6rem, 6vw, 4.75rem); letter-spacing: -.045em; margin-bottom: 2rem }
+label { display: block; font-weight: 600 }
+.controls { display: flex; gap: .6rem; margin: .5rem 0 }
+input,button { font: inherit; padding: .85rem 1rem; border-radius: .35rem }
+input { flex: 1; min-width: 0; border: 1px solid #738d80 }
+button { background: #16564a; color: white; border: 0; cursor: pointer }
+button:disabled { opacity: .65 }
+section { margin-top: 2.5rem }
+article { border-top: 1px solid #bfcfc6; padding: 1.1rem 0; overflow-wrap: anywhere }
+h3 { font-size: 1.45rem; margin: 0 }
+a { color: #16564a; text-underline-offset: .19em }
+article p { margin: .55rem 0 .25rem }
+@media (max-width: 430px) { .controls { flex-direction: column } }
