@@ -2,7 +2,7 @@ import os
 import secrets
 from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel, Field
-from app.services import research, rag
+from app.services import research, rag, generation
 
 def authorize(x_api_key: str = Header(default="")):
     expected = os.getenv("MEDJON_API_KEY", "")
@@ -39,3 +39,8 @@ async def semantic(body: Query):
 async def context(body: Query):
     validate(body)
     return await rag.context(body.query, body.limit)
+
+@router.post("/answer")
+async def answer(body: Query):
+    validate(body)
+    return await generation.answer(body.query, body.limit)
