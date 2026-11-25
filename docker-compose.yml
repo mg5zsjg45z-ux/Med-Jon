@@ -2,6 +2,11 @@ services:
   api:
     build: ./backend
     env_file: .env
+    environment:
+      DATABASE_URL: postgresql://medjon:${POSTGRES_PASSWORD}@db:5432/medjon
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "127.0.0.1:8000:8000"
   db:
@@ -10,6 +15,11 @@ services:
       POSTGRES_DB: medjon
       POSTGRES_USER: medjon
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?configure POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medjon -d medjon"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:
